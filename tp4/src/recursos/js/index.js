@@ -4,6 +4,7 @@ import { iniciarCatalogo, renderizarDestacados, renderizarDetalle, renderizarOfe
 import { agregarAlCarrito, actualizarContador, iniciarCarrito } from './carrito.js';
 import { iniciarContacto } from './contacto.js';
 import { notificar } from './utilidades.js';
+import { iniciarAutenticacion } from './login.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -41,6 +42,7 @@ const iniciar = async () => {
     iniciarBuscador();
     iniciarAgregarAlCarrito();
     if ($('formulario-contacto')) iniciarContacto();
+    if ($('formulario-login') || $('panel-perfil')) iniciarAutenticacion();
 
     const necesitaProductos = ['contenedor-productos', 'contenedor-destacados', 'contenedor-detalle', 'contenedor-ofertas', 'lista-carrito'].some($);
     if (!necesitaProductos) return;

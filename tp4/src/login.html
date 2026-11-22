@@ -49,43 +49,108 @@
         </header>
 
         <main class="contenido-principal">
-            <section class = "seccion-contacto">
-                <div class = "contenedor-formulario">
-                    <h1>Iniciar Sesión</h1>
-                    <form class = "formulario-contacto" action="./login.html" method="post">
-                        <div class="campo-form campo-completo">
-                            <label for="id_email">Correo electrónico:</label>
-                            <input 
-                            type="email" 
-                            id="id_email" 
-                            name="email_usuario" 
-                            placeholder="tu-email@ejemplo.com" 
-                            required
-                            >
-                        </div>
-                        <div class="campo-form campo-completo">
-                            <label for="id_contraseña">Contraseña:</label>
-                            <input 
-                            type="password" 
-                            id="id_contraseña" 
-                            name="contraseña_usuario" 
-                            required
-                            >
-                        </div>
-                        <div class="campo-completo">
+            <section class="seccion-contacto seccion-auth">
+                <div class="contenedor-formulario auth-card">
+                    <div id="auth-mensaje" role="status" aria-live="polite"></div>
+
+                    <div id="auth-pestañas" class="auth-pestañas" role="tablist" aria-label="Opciones de cuenta">
+                        <button type="button" id="pestaña-login" class="auth-pestaña activa" role="tab" aria-selected="true" aria-controls="panel-login" data-vista="login">Iniciar sesión</button>
+                        <button type="button" id="pestaña-registro" class="auth-pestaña" role="tab" aria-selected="false" aria-controls="panel-registro" data-vista="registro">Crear cuenta</button>
+                    </div>
+
+                    <div id="panel-login" role="tabpanel" aria-labelledby="pestaña-login" class="auth-panel">
+                        <h1>Iniciar sesión</h1>
+                        <form id="formulario-login" class="formulario-contacto" action="#" method="post">
+                            <div class="campo-form campo-completo">
+                                <label for="id_email">Correo electrónico</label>
+                                <input type="email" id="id_email" name="email" placeholder="tu-email@ejemplo.com" autocomplete="email" required>
+                            </div>
+                            <div class="campo-form campo-completo">
+                                <label for="id_contraseña">Contraseña</label>
+                                <input type="password" id="id_contraseña" name="password" minlength="8" autocomplete="current-password" required>
+                            </div>
+                            <div class="campo-completo auth-opciones">
+                                <label for="id_recordar">
+                                    <input type="checkbox" id="id_recordar" name="recordar">
+                                    Recordar mi sesión
+                                </label>
+                                <button type="button" class="auth-link" data-vista="recuperacion">¿Olvidaste tu contraseña?</button>
+                            </div>
+                            <div class="acciones-form campo-completo">
+                                <button type="submit" class="boton-principal">Ingresar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="panel-registro" role="tabpanel" aria-labelledby="pestaña-registro" class="auth-panel" hidden>
+                        <h1>Crear cuenta</h1>
+                        <form id="formulario-registro" class="formulario-contacto" action="#" method="post">
+                            <div class="campo-form campo-completo">
+                                <label for="id_nombre">Nombre y apellido</label>
+                                <input type="text" id="id_nombre" name="nombre" minlength="2" maxlength="80" autocomplete="name" required>
+                            </div>
+                            <div class="campo-form campo-completo">
+                                <label for="id_registro_email">Correo electrónico</label>
+                                <input type="email" id="id_registro_email" name="email" autocomplete="email" required>
+                            </div>
+                            <div class="campo-form campo-completo">
+                                <label for="id_registro_password">Contraseña</label>
+                                <input type="password" id="id_registro_password" name="password" minlength="8" autocomplete="new-password" aria-describedby="ayuda-password" required>
+                                <small id="ayuda-password">Usá al menos 8 caracteres.</small>
+                            </div>
+                            <div class="campo-form campo-completo">
+                                <label for="id_registro_password_confirmar">Repetir contraseña</label>
+                                <input type="password" id="id_registro_password_confirmar" name="confirmar" minlength="8" autocomplete="new-password" required>
+                            </div>
+                            <div class="campo-completo">
+                                <label for="id_terminos">
+                                    <input type="checkbox" id="id_terminos" name="terminos" required>
+                                    Acepto crear una cuenta local en este dispositivo.
+                                </label>
+                            </div>
+                            <div class="acciones-form campo-completo">
+                                <button type="submit" class="boton-principal">Crear cuenta</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="panel-recuperacion" role="tabpanel" class="auth-panel" hidden>
+                        <h1>Recuperar contraseña</h1>
+                        <p class="auth-descripcion">Esta demo permite restablecer una cuenta creada en este navegador.</p>
+                        <form id="formulario-recuperacion" class="formulario-contacto" action="#" method="post">
+                            <div class="campo-form campo-completo">
+                                <label for="id_recuperacion_email">Correo electrónico</label>
+                                <input type="email" id="id_recuperacion_email" name="email" autocomplete="email" required>
+                            </div>
+                            <div class="campo-form campo-completo">
+                                <label for="id_recuperacion_password">Nueva contraseña</label>
+                                <input type="password" id="id_recuperacion_password" name="password" minlength="8" autocomplete="new-password" required>
+                            </div>
+                            <div class="campo-form campo-completo">
+                                <label for="id_recuperacion_confirmar">Repetir nueva contraseña</label>
+                                <input type="password" id="id_recuperacion_confirmar" name="confirmar" minlength="8" autocomplete="new-password" required>
+                            </div>
+                            <div class="acciones-form campo-completo">
+                                <button type="button" class="boton-secundario" data-vista="login">Cancelar</button>
+                                <button type="submit" class="boton-principal">Restablecer</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="panel-perfil" class="auth-panel" hidden>
+                        <h1>Mi cuenta</h1>
+                        <div class="perfil-usuario">
+                            <div class="perfil-avatar" aria-hidden="true">A</div>
                             <div>
-                                <label for="id_recordar">Recordar mi cuenta</label>
-                                <input type="checkbox" id="id_recordar" name="recordar_sesion">
+                                <h2 id="perfil-nombre"></h2>
+                                <p id="perfil-email"></p>
                             </div>
                         </div>
-                        <div>
-                            <p><a href="./login.html">¿Olvidaste tu contraseña?</a></p>
-                            <p>¿No tenés cuenta todavía? <a href="./login.html">Registrate acá</a></p>
+                        <div class="acciones-form">
+                            <button type="button" id="cerrar-sesion" class="boton-secundario">Cerrar sesión</button>
+                            <a href="./catalogo.html" class="boton-principal">Ir al catálogo</a>
                         </div>
-                        <div class = "acciones-form campo-completo">
-                            <button type="submit" class="boton-principal">Ingresar</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </section>
         </main>
